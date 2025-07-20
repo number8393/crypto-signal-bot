@@ -102,4 +102,8 @@ def main():
         else:
             send_telegram_message("⏰ Неудачное время для торговли. Жди лучшее окно.")
 
-        time.sleep(60)  # Каждые
+        time.sleep(60)  # Каждые 60 секунд
+
+# ▶️ Запуск
+if __name__ == "__main__":
+    main()
