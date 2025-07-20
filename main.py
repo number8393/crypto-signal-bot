@@ -42,7 +42,7 @@ def get_news_recommendation():
 
 # 📡 Генератор сигналов
 def get_signal(pair):
-    data = yf.download(pair, period="2d", interval="1h")
+    data = yf.download(pair, period="2d", interval="1h", progress=False)
     if data.empty:
         return None
 
@@ -85,7 +85,7 @@ def main():
         if utc_now.weekday() < 5 or utc_now.hour in range(8, 24):
             for pair in CRYPTO_PAIRS:
                 result = get_signal(pair)
-                if result:
+                if result is not None:
                     message = (
                         f"📊 <b>Сигнал для: {result['pair']}</b>\n"
                         f"💵 Цена: {result['price']:.2f}$\n"
@@ -102,8 +102,8 @@ def main():
         else:
             send_telegram_message("⏰ Неудачное время для торговли. Жди лучшее окно.")
 
-        time.sleep(60)  # Каждые 60 секунд
+        time.sleep(60)  # Каждую минуту проверка
 
-# ▶️ Запуск
 if __name__ == "__main__":
     main()
+
