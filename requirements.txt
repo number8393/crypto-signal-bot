@@ -1,1 +1,5 @@
+requests
+yfinance
+pytz
+``
 
